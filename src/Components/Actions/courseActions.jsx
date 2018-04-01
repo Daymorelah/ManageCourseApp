@@ -18,16 +18,18 @@ export function updateCourseSuccess(savedCourse){
   return {type: types.UPDATE_COURSE_SUCCESS, savedCourse}
 }
 
-export function createCourseSuccess(saveCourse)
+export function createCourseSuccess(savedCourse){
+  return {type: types.CREATE_COURSE_SUCCESS, savedCourse}
+}
 
 export function saveCourse(course){
   return (dispatch, getState) =>{ //getstate is used to access the redux store diretlty here witout avin 2 pss a parameter.
     return courseApi.saveCourse(course)
       .then(savedCourse => course.id ? dispatch(updateCourseSuccess(savedCourse)) : 
-        dispatch(createCourseSuccess(saveCourse)) )
+        dispatch(createCourseSuccess(savedCourse)) )
       .catch( err => {
-        console.log('got an err in fun saveCourse an it is ==> ', err.message);
-        throw(err);
+        console.log('got an err in fun saveCourse an it is ==> ', err);
+        //throw(err);
       })
   }
 }
