@@ -13,7 +13,7 @@ const Header = ({loading}) =>{
       <NavLink to='/coursepage' activeClassName="selected" > Course Page</NavLink>
       { " | " }
       <NavLink to='/course' activeClassName="selected" > Manage Course Page</NavLink>
-  { loading && <LoadingDots interval={200} dots={20} /> }
+      { loading && <LoadingDots interval={200} dots={20} /> }
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import * as courseActions from '../Actions/courseActions.jsx';
 import CourseForm from './courseForm.jsx';
 
@@ -9,8 +10,9 @@ class ManageCoursePage extends Component {
   constructor(props, context){
     super(props, context);
     this.state ={
-      course: Object.assign({}, this.props.course),
-      errors: {}
+      course: Object.assign({}, props.course),
+      errors: {},
+      saving: false,
     }
     this.updateCourseState = this.updateCourseState.bind(this);
     this.saveCourse = this.saveCourse.bind(this);
@@ -26,16 +28,27 @@ class ManageCoursePage extends Component {
     course[field] = event.target.value;
     return this.setState({course: course})
   }
+  redirect(){
+    this.setState({saving: false});
+    toastr.success('Course saved');
+    this.props.history.push('/coursepage');
+  }
   saveCourse(event){
     event.preventDefault();
-    this.props.actions.saveCourse(this.state.course);
-    this.props.history.push('/coursepage');
+    this.setState({saving: true})
+    this.props.actions.saveCourse(this.state.course)
+    .then( () => this.redirect())
+    .catch(err => {
+      this.setState({saving: false});
+      console.log('got an err in savecourse and it is ==>',err);
+      toastr.error(err);
+    })
   }
   render(){
     return(
       <CourseForm 
         course={this.state.course} errors={this.state.errors} allAuthors={this.props.authors}
-        onChange={this.updateCourseState} onSave={this.saveCourse}
+        onChange={this.updateCourseState} onSave={this.saveCourse} saving={this.state.saving}
       />
     );
   }
