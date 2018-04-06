@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
+import { formatedAuthorDataForSelectInputField } from '../Selectors/selectors';
 import * as courseActions from '../Actions/courseActions.jsx';
 import CourseForm from './courseForm.jsx';
 
@@ -33,8 +34,21 @@ export class ManageCoursePage extends Component {  //use export for testing cont
     toastr.success('Course saved');
     this.props.history.push('/coursepage');
   }
+  courseFormIsValid(){
+    let formIsValid = true;
+    let errors = {};
+    if(this.state.course.title.length < 5){
+      errors.title = 'Title must be at least 5 characters';
+      formIsValid = false;
+    }
+    this.setState({errors: errors});
+    return formIsValid;
+  }
   saveCourse(event){
     event.preventDefault();
+    if(!this.courseFormIsValid()){
+      return ;
+    }
     this.setState({saving: true})
     this.props.actions.saveCourse(this.state.course)
     .then( () => this.redirect())
@@ -78,16 +92,9 @@ function mapStateToProps (state, ownProps){
   if(courseId && state.courses.length > 0){
     course = getCourseById(state.courses, courseId);
   }
-  const formatedAuthorDataForSelectInputField = state.authors.map( author => {
-    return {
-      value: author.id,  
-      text: author.firstName+ ' ' +author.lastName, 
-    }
-  })
-
   return{
     course: course,
-    authors: formatedAuthorDataForSelectInputField
+    authors: formatedAuthorDataForSelectInputField(state.authors)
   };
 }
 
