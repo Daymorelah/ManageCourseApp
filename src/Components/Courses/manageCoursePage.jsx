@@ -6,7 +6,7 @@ import toastr from 'toastr';
 import * as courseActions from '../Actions/courseActions.jsx';
 import CourseForm from './courseForm.jsx';
 
-class ManageCoursePage extends Component {
+export class ManageCoursePage extends Component {  //use export for testing container compoents
   constructor(props, context){
     super(props, context);
     this.state ={

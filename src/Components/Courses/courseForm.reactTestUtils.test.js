@@ -3,6 +3,7 @@ import React from 'react';
 import shallowRenderer from 'react-test-renderer/shallow';
 import CourseForm from './courseForm.jsx';
 
+//the func below mimiks what would be returned by the courseForm component
 function setUp(saving){
   let props = {
     course: {}, saving: saving, errors:{},

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --reporter spec --require tools/testSetup.js \"src/**/*.test.js\"",
+    "test": "mocha --compilers js:babel-register --reporter spec --require tools/testSetup.js \"src/Components/**/*.*.test.js\"",
     "start": "babel-node tools/srcServer.js"
   },
   "keywords": [],
@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
