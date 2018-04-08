@@ -3,14 +3,14 @@ import path from 'path';
 import compression from 'compression';
 
 /*eslint-disable no-console */
-const port = 3001;
+const port = 3466;
 const app = express();
 
 app.use(compression());
 app.use(express.static('dist'));
 
 app.get('*', (req, res) =>{
-  res.sendfile(path.resolve(__dirname, '../dist/index.html'));
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'));
 })
 
 app.listen(port, (err) =>{

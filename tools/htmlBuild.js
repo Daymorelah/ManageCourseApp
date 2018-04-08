@@ -8,7 +8,7 @@
   }
 
   const choose = cheerio.load(markup);
-  choose('head').prepend('<link rel="stylesheet" href="styles.css">');
+  choose('head').prepend('<link rel="stylesheet" type="text/css" href="style.css">');
    
   fs.writeFile('dist/index.html', choose.html(), 'utf8', (err)=>{
     if(err){
