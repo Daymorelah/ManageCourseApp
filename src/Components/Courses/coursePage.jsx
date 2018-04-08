@@ -7,19 +7,19 @@ import CourseList from './courseList.jsx';
 class CoursePage extends Component{
   constructor(props, context){
     super(props, context);
+    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
   }
-  couserRow(course, index){
-    return(
-      <div key={index}>
-        {course.title}
-      </div>
-    );
+  redirectToAddCoursePage(){
+    this.props.history.push('/course');
   }
   render(){
     const {courses} = this.props;
     return(
       <div className='container'>
         <h1>Courses</h1>
+        <input
+          type='button' value='Add Course' className='btn btn-primary' onClick={this.redirectToAddCoursePage}
+        />
         <CourseList courses={courses} />
       </div>
     );

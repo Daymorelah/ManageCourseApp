@@ -18,6 +18,11 @@ const authors = [
     id: 'dan-abramov',
     firstName: 'Dan',
     lastName: 'Abramov'
+  },
+  {
+    id: 'Ademola Hussain',
+    firstName: 'Ademola',
+    lastName: 'Hussain'
   }
 ];
 
